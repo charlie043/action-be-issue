@@ -13,13 +13,15 @@ async function run() {
     const commit = await octokit.git.getCommit({
       owner: GITHUB_USER,
       repo: GITHUB_REPOS,
-      commit_sha: process.env.GITHUB_SHA
+      commit_sha: process.env.GITHUB_SHA,
+      mediaType: { format: 'diff' }
     })
     console.log(commit)
   }
   catch (error) {
     core.setFailed(error.message);
   }
+
 }
 
 run()
