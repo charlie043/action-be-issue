@@ -17,6 +17,7 @@ async function run() {
       mediaType: { format: 'diff' }
     })
     console.log(JSON.stringify(commit))
+    console.log(commit.data.parents)
   }
   catch (error) {
     core.setFailed(error.message);

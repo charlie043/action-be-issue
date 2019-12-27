@@ -505,7 +505,8 @@ async function run() {
       commit_sha: process.env.GITHUB_SHA,
       mediaType: { format: 'diff' }
     })
-    console.log(commit)
+    console.log(JSON.stringify(commit))
+    console.log(commit.data.parents)
   }
   catch (error) {
     core.setFailed(error.message);
