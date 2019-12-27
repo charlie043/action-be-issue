@@ -494,9 +494,10 @@ const github = __webpack_require__(469);
 async function run() {
   try {
     const githubToken = core.getInput('myToken');
+    console.log(githubToken)
     const octokit = new github.GitHub(githubToken);
 
-    const [ GITHUB_USER, GITHUB_REPOS ] = process.env.GITHUB_REPOSITORY
+    const [ GITHUB_USER, GITHUB_REPOS ] = process.env.GITHUB_REPOSITORY.split('/')
 
     const commit = await octokit.git.getCommit({
       owner: GITHUB_USER,
