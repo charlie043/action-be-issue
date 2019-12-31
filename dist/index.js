@@ -492,6 +492,8 @@ const github = __webpack_require__(469);
 const atob = __webpack_require__(995)
 const btoa = __webpack_require__(408)
 
+const decode = (base64) => decodeURIComponent(escape(atob(base64)))
+
 // most @actions toolkit packages have async methods
 async function run() {
   try {
@@ -523,7 +525,7 @@ async function run() {
         file_sha: file.sha
       })
       console.log('blob', blob.data.content)
-      const raw = atob(blob.data.content)
+      const raw = decode(blob.data.content)
       console.log('decoded', raw)
       const lines = raw.split('\n')
       const newLines = []

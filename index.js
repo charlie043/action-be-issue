@@ -3,6 +3,8 @@ const github = require('@actions/github');
 const atob = require('atob')
 const btoa = require('btoa')
 
+const decode = (base64) => decodeURIComponent(escape(atob(base64)))
+
 // most @actions toolkit packages have async methods
 async function run() {
   try {
@@ -34,7 +36,7 @@ async function run() {
         file_sha: file.sha
       })
       console.log('blob', blob.data.content)
-      const raw = atob(blob.data.content)
+      const raw = decode(blob.data.content)
       console.log('decoded', raw)
       const lines = raw.split('\n')
       const newLines = []
