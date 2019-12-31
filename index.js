@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const atob = require('atob')
+const btoa = require('btoa')
 
 // most @actions toolkit packages have async methods
 async function run() {
@@ -57,7 +58,7 @@ async function run() {
       path: file.filename,
       sha: file.sha,
       message: 'create issues',
-      content: newRaw
+      content: btoa(newRaw)
     })
   }
   catch (error) {

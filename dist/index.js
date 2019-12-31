@@ -490,6 +490,7 @@ module.exports = require("os");
 const core = __webpack_require__(470);
 const github = __webpack_require__(469);
 const atob = __webpack_require__(995)
+const btoa = __webpack_require__(408)
 
 // most @actions toolkit packages have async methods
 async function run() {
@@ -546,7 +547,7 @@ async function run() {
       path: file.filename,
       sha: file.sha,
       message: 'create issues',
-      content: newRaw
+      content: btoa(newRaw)
     })
   }
   catch (error) {
@@ -4659,6 +4660,30 @@ function Octokit(plugins, options) {
 
   return api;
 }
+
+
+/***/ }),
+
+/***/ 408:
+/***/ (function(module) {
+
+(function () {
+  "use strict";
+
+  function btoa(str) {
+    var buffer;
+
+    if (str instanceof Buffer) {
+      buffer = str;
+    } else {
+      buffer = Buffer.from(str.toString(), 'binary');
+    }
+
+    return buffer.toString('base64');
+  }
+
+  module.exports = btoa;
+}());
 
 
 /***/ }),

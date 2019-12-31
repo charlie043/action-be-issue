@@ -26,7 +26,8 @@
   "dependencies": {
     "@actions/core": "^1.1.1",
     "@actions/github": "^2.0.0",
-    "atob": "^2.1.2"
+    "atob": "^2.1.2",
+    "btoa": "^1.2.1"
   },
   "devDependencies": {
     "@zeit/ncc": "^0.20.5",
