@@ -22,8 +22,8 @@ async function run() {
     const compareData = await octokit.repos.compareCommits({
       owner: GITHUB_USER,
       repo: GITHUB_REPOS,
-      base: commitSha,
-      head: parentSha
+      base: parentSha,
+      head: commitSha
     })
     console.log(compareData)
   }
