@@ -524,8 +524,9 @@ async function run() {
         repo,
         file_sha: file.sha
       })
+      console.log('blob', blob.data.content)
       const raw = decode(blob.data.content)
-      console.log('raw', raw)
+      console.log('decoded', raw)
       const lines = raw.split('\n')
       const newLines = []
       for (let line of lines) {
