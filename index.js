@@ -26,7 +26,7 @@ async function run() {
     })
     console.log(compare.data.files)
     const file = compare.data.files[0]
-    const content = await octokit.repos.getBlob({
+    const content = await octokit.git.getBlob({
       owner: GITHUB_USER,
       repo: GITHUB_REPOS,
       file_sha: file.sha
