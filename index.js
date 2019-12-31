@@ -37,6 +37,7 @@ async function run() {
         file_sha: file.sha
       })
       const raw = decode(blob.data.content)
+      console.log('raw', raw)
       const lines = raw.split('\n')
       const newLines = []
       for (let line of lines) {
@@ -55,6 +56,7 @@ async function run() {
         newLines.push(newLine)
       }
       const newRaw = newLines.join('\n')
+      console.log(newRaw)
       await octokit.repos.createOrUpdateFile({
         owner,
         repo,
