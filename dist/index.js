@@ -522,10 +522,31 @@ async function run() {
     })
     const raw = atob(blob.data.content)
     const lines = raw.split('\n')
+    const newLines = []
     for (let line of lines) {
-      console.log(line)
-      console.log(line.match(/- \[i\] .+/))
+      let newLine = ''
+      if (line.match(/- \[i\] .+/)) {
+        const title = line.replace('- [i] ', '')
+        const issue = await octokit.issues.create({
+          owner: GITHUB_USER,
+          repo: GITHUB_REPOS,
+          title
+        })
+        console.log(issue)
+        newLine = `- issueNumber ${title}`
+      } else {
+        newLine = line
+      }
+      newLines.push(newLine)
     }
+    const newRaw = newLines.join('\n')
+    await octokit.repos.createOrUpdateFile({
+      owner: GITHUB_USER,
+      repo: GITHUB_REPOS,
+      path: file.filename,
+      message: 'create issues',
+      content: newRaw
+    })
   }
   catch (error) {
     core.setFailed(error.message);
