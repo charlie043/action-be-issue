@@ -533,7 +533,7 @@ async function run() {
           title
         })
         console.log(issue)
-        newLine = `- issueNumber ${title}`
+        newLine = `- #${issue.data.number} ${title}`
       } else {
         newLine = line
       }
@@ -544,6 +544,7 @@ async function run() {
       owner: GITHUB_USER,
       repo: GITHUB_REPOS,
       path: file.filename,
+      sha: file.sha,
       message: 'create issues',
       content: newRaw
     })
