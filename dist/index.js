@@ -507,14 +507,13 @@ async function run() {
     })
     const commitSha = commit.data.sha
     const parentSha = commit.data.parents[0].sha
-    console.log(commitSha, parentSha)
-    const compareData = await octokit.repos.compareCommits({
+    const compare = await octokit.repos.compareCommits({
       owner: GITHUB_USER,
       repo: GITHUB_REPOS,
       base: parentSha,
       head: commitSha
     })
-    console.log(compareData)
+    console.log(compare.data.files)
   }
   catch (error) {
     core.setFailed(error.message);
