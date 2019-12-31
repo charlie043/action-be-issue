@@ -514,7 +514,6 @@ async function run() {
       base: parentSha,
       head: commitSha
     })
-    console.log(compare.data.files)
     const file = compare.data.files[0]
     const blob = await octokit.git.getBlob({
       owner: GITHUB_USER,
@@ -524,7 +523,8 @@ async function run() {
     const raw = atob(blob.data.content)
     const lines = raw.split('\n')
     for (let line of lines) {
-      console.log(line.match(/- [ ] .+/))
+      console.log(line)
+      console.log(line.match(/- \[i\] .+/))
     }
   }
   catch (error) {
