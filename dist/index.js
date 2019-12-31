@@ -492,7 +492,6 @@ const github = __webpack_require__(469);
 const atob = __webpack_require__(995)
 const btoa = __webpack_require__(408)
 
-const encode = (text) => btoa(encodeURIComponent(text));
 const decode = (base64) => decodeURIComponent(atob(base64));
 
 // most @actions toolkit packages have async methods
@@ -545,14 +544,15 @@ async function run() {
         newLines.push(newLine)
       }
       const newRaw = newLines.join('\n')
-      console.log(newRaw)
+      console.log('newRaw', newRaw)
+      console.log('btoa', btoa(newRaw))
       await octokit.repos.createOrUpdateFile({
         owner,
         repo,
         path: file.filename,
         sha: file.sha,
         message: 'create issues',
-        content: encode(newRaw)
+        content: btoa(newRaw)
       })
     }
   }
