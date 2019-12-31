@@ -1,5 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
+const atob = require('atob')
 
 // most @actions toolkit packages have async methods
 async function run() {
@@ -26,12 +27,15 @@ async function run() {
     })
     console.log(compare.data.files)
     const file = compare.data.files[0]
-    const content = await octokit.git.getBlob({
+    const blob = await octokit.git.getBlob({
       owner: GITHUB_USER,
       repo: GITHUB_REPOS,
       file_sha: file.sha
     })
-    console.log(content)
+
+    const raw = atob(blob.data.content)
+    console.log(raw)
+    console.log(raw.split('\n'))
 
   }
   catch (error) {

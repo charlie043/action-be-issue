@@ -489,6 +489,7 @@ module.exports = require("os");
 
 const core = __webpack_require__(470);
 const github = __webpack_require__(469);
+const atob = __webpack_require__(995)
 
 // most @actions toolkit packages have async methods
 async function run() {
@@ -515,12 +516,15 @@ async function run() {
     })
     console.log(compare.data.files)
     const file = compare.data.files[0]
-    const content = await octokit.git.getBlob({
+    const blob = await octokit.git.getBlob({
       owner: GITHUB_USER,
       repo: GITHUB_REPOS,
       file_sha: file.sha
     })
-    console.log(content)
+
+    const raw = atob(blob.data.content)
+    console.log(raw)
+    console.log(raw.split('\n'))
 
   }
   catch (error) {
@@ -11158,6 +11162,21 @@ function onceStrict (fn) {
   f.called = false
   return f
 }
+
+
+/***/ }),
+
+/***/ 995:
+/***/ (function(module) {
+
+"use strict";
+
+
+function atob(str) {
+  return Buffer.from(str, 'base64').toString('binary');
+}
+
+module.exports = atob.atob = atob;
 
 
 /***/ })
