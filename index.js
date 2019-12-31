@@ -32,11 +32,11 @@ async function run() {
       repo: GITHUB_REPOS,
       file_sha: file.sha
     })
-
     const raw = atob(blob.data.content)
-    console.log(raw)
-    console.log(raw.split('\n'))
-
+    const lines = raw.split('\n')
+    for (let line of lines) {
+      console.log(line.match(/- [ ] .+/))
+    }
   }
   catch (error) {
     core.setFailed(error.message);
