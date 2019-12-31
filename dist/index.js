@@ -492,6 +492,9 @@ const github = __webpack_require__(469);
 const atob = __webpack_require__(995)
 const btoa = __webpack_require__(408)
 
+const encode = (text) => btoa(encodeURIComponent(text));
+const decode = (base64) => decodeURIComponent(atob(base64));
+
 // most @actions toolkit packages have async methods
 async function run() {
   try {
@@ -522,7 +525,7 @@ async function run() {
         repo,
         file_sha: file.sha
       })
-      const raw = atob(blob.data.content)
+      const raw = decode(blob.data.content)
       const lines = raw.split('\n')
       const newLines = []
       for (let line of lines) {
@@ -547,7 +550,7 @@ async function run() {
         path: file.filename,
         sha: file.sha,
         message: 'create issues',
-        content: btoa(newRaw)
+        content: encode(newRaw)
       })
     }
   }
