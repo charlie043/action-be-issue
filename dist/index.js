@@ -515,12 +515,13 @@ async function run() {
     })
     console.log(compare.data.files)
     const file = compare.data.files[0]
-    const content = await octokit.repos.getContents({
+    const content = await octokit.repos.getContent({
       owner: GITHUB_USER,
       repo: GITHUB_REPOS,
       path: file.filename
     })
     console.log(content)
+
   }
   catch (error) {
     core.setFailed(error.message);
