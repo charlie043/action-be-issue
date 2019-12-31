@@ -45,7 +45,7 @@ async function run() {
           title
         })
         console.log(issue)
-        newLine = `- #${issue.data.number} ${title}`
+        newLine = `- [#${issue.data.number}](${issue.data.html_url}) ${title}`
       } else {
         newLine = line
       }
